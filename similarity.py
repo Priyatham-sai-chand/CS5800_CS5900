@@ -1,9 +1,9 @@
 # -------------------------------------------------------------------------
 # AUTHOR: Priyatham Sai Chand Bazaru 
 # FILENAME: similarity
-# SPECIFICATION: description of the program
+# SPECIFICATION: calculate the cosine similarity between various documents and print the most similar documents.
 # FOR: CS 5990 (Advanced Data Mining) - Assignment #1
-# TIME SPENT: how long it took you to complete the assignment
+# TIME SPENT: 3 hours
 # -----------------------------------------------------------*/
 
 # Importing some Python libraries
