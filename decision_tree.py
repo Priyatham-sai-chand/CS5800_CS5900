@@ -20,17 +20,15 @@ for ds in dataSets:
     X = []
     Y = []
 
-    df = pd.read_csv("cheat_data.csv", sep=',', header=0)
+    df = pd.read_csv(ds, sep=',', header=0)
     df['Taxable Income'] = df['Taxable Income'].str.replace('k','')
     df['Taxable Income'] = df['Taxable Income'].astype(float)
     df['Refund'] = df['Refund'].map(dict(Yes=1, No=0))
     df['Marital Status'] = df['Marital Status'].map(dict(Single=[1,0,0],Divorced=[0,1,0],Married=[0,0,1]))
     df['Cheat'] = df['Cheat'].map(dict(Yes=1, No=0))
     
-    # Remove Cheat column
+    # Remove Cheat column and tid
     data_training = np.array(df.values)[:,1:-1]
-    print("data training\n")
-    print(data_training)
     def make(row):
         row = np.insert(row,1,row[1])
         row = np.delete(row,4)
@@ -84,13 +82,12 @@ for ds in dataSets:
 
 
            
-           print(data)
            predicted_class = clf.predict([data[:-1]])[0]
 
            #compare the prediction with the true label (located at data[3]) of the test instance to start calculating the model accuracy.
+
+           #use the last colum as the true label instead of 3 for edge cases.
            test_class_value = data[-1]
-           
-           print("test class " + str(predicted_class))
            if predicted_class == 1 and test_class_value == 1:
                tp+=1
            elif predicted_class == 1 and test_class_value == 0:
