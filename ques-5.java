@@ -13,15 +13,15 @@ protected String address;
 public class Account {
 private AccountHolder holder;
 private double balance = 0;
-	public Account(double amount, AccountHolder holder) {
+	public Account(double amt, AccountHolder holder) {
 		this.holder = holder;
-		this.balance = amount;
+		this.balance = amt;
 	}
-	public void deposit(double amount) {
-		balance = balance + amount;
+	public void deposit(double amt) {
+		balance = balance + amt;
 	}
-	public void withdraw(double amount) {
-		balance = balance - amount;
+	public void withdraw(double amt) {
+		balance = balance - amt;
 	}
 	public double getBalance() {
 		return balance;
