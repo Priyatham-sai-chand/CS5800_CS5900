@@ -81,7 +81,6 @@ for index, rule in rules.iterrows():
         for ant in list(rule.antecedents):
             if ant in row.values:
                 sup_count += 1
-    #supportCount = calcSupportCount(list(rule.antecedents), df)
     prior = sup_count/len(encoded_vals)
     print("Prior:"+str(prior))
     print("Gain in Confidence: " + str(100*(rule.confidence-prior)/prior))
