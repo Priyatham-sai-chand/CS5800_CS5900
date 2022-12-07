@@ -72,14 +72,19 @@ freq_items = apriori(ohe_df, min_support=0.2, use_colnames=True, verbose=1)
 rules = association_rules(freq_items, metric="confidence", min_threshold=0.6)
 
 #iterate the rules data frame and print the apriori algorithm results by using the following format:
+sup_count = 0
 for index, rule in rules.iterrows():
     print(','.join(list(rule.antecedents))+" -> "+','.join(list(rule.consequents)))
     print("Support:"+str(rule.support))
     print("Confidence:"+str(rule.confidence))
+    for ind,row in df.iterrows():
+        for ant in list(rule.antecedents):
+            if ant in row.values:
+                sup_count += 1
     #supportCount = calcSupportCount(list(rule.antecedents), df)
-    #prior = supportCount/len(encoded_vals)
-    #print("Prior:"+str(prior))
-    #print("Gain in Confidence: " + str(100*(rule.confidence-prior)/prior))
+    prior = sup_count/len(encoded_vals)
+    print("Prior:"+str(prior))
+    print("Gain in Confidence: " + str(100*(rule.confidence-prior)/prior))
 #Meat, Cheese -> Eggs
 #Support: 0.21587301587301588
 #Confidence: 0.6666666666666666
@@ -92,7 +97,7 @@ for index, rule in rules.iterrows():
 #prior = suportCount/len(encoded_vals) -> encoded_vals is the number of transactions
 #print("Gain in Confidence: " + str(100*(rule_confidence-prior)/prior))
 #-->add your python code below
-print("\n" +  str(rules.keys))
+#print("\n" +  str(rules.keys))
 
 #Finally, plot support x confidence
 plt.scatter(rules['support'], rules['confidence'], alpha=0.5)
